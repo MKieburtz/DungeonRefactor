@@ -56,7 +56,7 @@ This method is called by: hero constructor
   public void readName()
   {
 		System.out.print("Enter character name: ");
-		name = Keyboard.readString();
+		name = Keyboard.kb.next();
   }//end readName method
 
 /*-------------------------------------------------------
@@ -122,5 +122,37 @@ This method is called by: external sources
 		System.out.println("Number of turns this round is: " + numTurns);
 
 	}//end battleChoices
+
+
+	/*-------------------------------------------------------------------
+    chooseHero allows the user to select a hero, creates that hero, and
+    returns it.  It utilizes a polymorphic reference (Hero) to accomplish
+    this task
+    ---------------------------------------------------------------------*/
+	public static Hero chooseHero()
+	{
+		int choice;
+		Hero theHero;
+
+		System.out.println("Choose a hero:\n" +
+				"1. Warrior\n" +
+				"2. Sorceress\n" +
+				"3. Thief");
+		choice = Integer.parseInt(Keyboard.kb.nextLine());
+
+		switch(choice)
+		{
+			case 1: return new Warrior();
+
+			case 2: return new Sorceress();
+
+			case 3: return new Thief();
+
+			default: System.out.println("invalid choice, returning Thief");
+				return new Thief();
+		}//end switch
+	}//end chooseHero method
+
+
 
 }//end Hero class
