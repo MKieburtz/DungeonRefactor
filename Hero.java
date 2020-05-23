@@ -91,7 +91,7 @@ Returns: nothing
 This method calls: defend() or base version of method
 This method is called by: attack() from base class
 ---------------------------------------------------------*/
-public void subtractHitPoints(int hitPoints)
+public void loseHealth(int hitPoints)
 	{
 		if (defend())
 		{
@@ -99,7 +99,7 @@ public void subtractHitPoints(int hitPoints)
 		}
 		else
 		{
-			super.subtractHitPoints(hitPoints);
+			super.loseHealth(hitPoints);
 		}
 
 
@@ -136,7 +136,7 @@ This method is called by: external sources
 
 			switch (choice)
 			{
-				case 1: attack(opponent);
+				case 1: mainAttack(opponent);
 					break;
 				case 2: specialMove.preformSpecial(this, (Monster) opponent);
 					break;

@@ -36,7 +36,7 @@ public class DungeonGame {
 
             //monster's turn (provided it's still alive!)
             if (theMonster.isAlive())
-                theMonster.attack(theHero);
+                theMonster.mainAttack(theHero);
 
             //let the player bail out if desired
             System.out.print("\n-->q to quit, anything else to continue: ");

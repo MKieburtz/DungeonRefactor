@@ -49,9 +49,9 @@ public abstract class Monster extends DungeonCharacter
   }//end heal method
 
 //-----------------------------------------------------------------
- public void subtractHitPoints(int hitPoints)
+ public void loseHealth(int hitPoints)
  {
-		super.subtractHitPoints(hitPoints);
+		super.loseHealth(hitPoints);
 		heal();
  }//end method
 
