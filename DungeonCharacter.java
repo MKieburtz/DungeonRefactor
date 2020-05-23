@@ -36,11 +36,7 @@
 public abstract class DungeonCharacter implements Comparable
 {
 
-	protected String name;
-	protected int hitPoints;
-	protected int attackSpeed;
-	protected double chanceToHit;
-	protected int damageMin, damageMax;
+	protected DungeonCharacterStats stats;
 
 	public int compareTo(Object o)
 	{
@@ -54,30 +50,24 @@ public abstract class DungeonCharacter implements Comparable
 				     double chanceToHit, int damageMin, int damageMax)
 	{
 
-		this.name = name;
-		this.hitPoints = hitPoints;
-		this.attackSpeed = attackSpeed;
-		this.chanceToHit = chanceToHit;
-		this.damageMin = damageMin;
-		this.damageMax = damageMax;
-
+		stats = new DungeonCharacterStats(name, hitPoints, attackSpeed, chanceToHit, damageMin, damageMax);
 	}//end constructor
 
 //-----------------------------------------------------------------
 	public String getName()
 	{
-		return name;
+		return stats.name;
 	}//end getName
 
 //-----------------------------------------------------------------
 	public int getHitPoints()
 	{
-		return hitPoints;
+		return stats.hitPoints;
 	}//end getHitPoints
 //-----------------------------------------------------------------
 	public int getAttackSpeed()
 	{
-		return attackSpeed;
+		return stats.attackSpeed;
 	}//end getAttackSpeed
 
 
@@ -96,7 +86,7 @@ This method is called by: heal method of monsters and Sorceress
 			System.out.println("Hitpoint amount must be positive.");
 		else
 		{
-			this.hitPoints += hitPoints;
+			stats.hitPoints += hitPoints;
 			//System.out.println("Remaining Hit Points: " + hitPoints);
 
 		}
@@ -119,9 +109,9 @@ This method is called by: overridden versions in Hero and Monster
 			System.out.println("Hitpoint amount must be positive.");
 		else if (hitPoints >0)
 		{
-			this.hitPoints -= hitPoints;
-			if (this.hitPoints < 0)
-				this.hitPoints = 0;
+			stats.hitPoints -= hitPoints;
+			if (stats.hitPoints < 0)
+				stats.hitPoints = 0;
 			System.out.println(getName() + " hit " +
 								" for <" + hitPoints + "> points damage.");
 			System.out.println(getName() + " now has " +
@@ -129,8 +119,8 @@ This method is called by: overridden versions in Hero and Monster
 			System.out.println();
 		}//end else if
 
-		if (this.hitPoints == 0)
-			System.out.println(name + " has been killed :-(");
+		if (stats.hitPoints == 0)
+			System.out.println(stats.name + " has been killed :-(");
 
 
 	}//end method
@@ -146,7 +136,7 @@ This method is called by: unknown (intended for external use)
 ---------------------------------------------------------*/
     public boolean isAlive()
 	{
-	  return (hitPoints > 0);
+	  return (stats.hitPoints > 0);
 	}//end isAlive method
 
 /*-------------------------------------------------------
@@ -166,27 +156,25 @@ hero classes and externally
 		boolean canAttack;
 		int damage;
 
-		canAttack = Math.random() <= chanceToHit;
+		canAttack = Math.random() <= stats.chanceToHit;
 
 		if (canAttack)
 		{
-			damage = (int)(Math.random() * (damageMax - damageMin + 1))
-						+ damageMin ;
+			damage = (int)(Math.random() * (stats.damageMax - stats.damageMin + 1))
+						+ stats.damageMin ;
 			opponent.subtractHitPoints(damage);
 
 
-
-			System.out.println();
-		}//end if can attack
+        }//end if can attack
 		else
 		{
 
 			System.out.println(getName() + "'s attack on " + opponent.getName() +
 								" failed!");
-			System.out.println();
-		}//end else
+        }//end else
+        System.out.println();
 
-	}//end attack method
+    }//end attack method
 
 //-----------------------------------------------------------------
 

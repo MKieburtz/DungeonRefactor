@@ -32,6 +32,7 @@ public abstract class Hero extends DungeonCharacter
 {
 	protected double chanceToBlock;
 	protected int numTurns;
+	protected SpecialMove specialMove;
 
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
@@ -56,7 +57,7 @@ This method is called by: hero constructor
   public void readName()
   {
 		System.out.print("Enter character name: ");
-		name = Keyboard.readString();
+		stats.name = Keyboard.readString();
   }//end readName method
 
 /*-------------------------------------------------------
@@ -74,6 +75,10 @@ This method is called by: subtractHitPoints()
 
   }//end defend method
 
+	public void incrementNumTurns() {
+  		numTurns++;
+	}
+
 /*-------------------------------------------------------
 subtractHitPoints checks to see if hero blocked attack, if so a message
 is displayed, otherwise base version of this method is invoked to
@@ -90,7 +95,7 @@ public void subtractHitPoints(int hitPoints)
 	{
 		if (defend())
 		{
-			System.out.println(name + " BLOCKED the attack!");
+			System.out.println(stats.name + " BLOCKED the attack!");
 		}
 		else
 		{
@@ -114,13 +119,36 @@ This method is called by: external sources
 ---------------------------------------------------------*/
 	public void battleChoices(DungeonCharacter opponent)
 	{
-	    numTurns = attackSpeed/opponent.getAttackSpeed();
+	    numTurns = stats.attackSpeed/opponent.getAttackSpeed();
 
 		if (numTurns == 0)
 			numTurns++;
 
 		System.out.println("Number of turns this round is: " + numTurns);
 
+		int choice;
+		do
+		{
+			System.out.println("1. Attack Opponent");
+			System.out.println("2. " + specialMove.getName());
+			System.out.print("Choose an option: ");
+			choice = Keyboard.readInt();
+
+			switch (choice)
+			{
+				case 1: attack(opponent);
+					break;
+				case 2: specialMove.preformSpecial(this, (Monster) opponent);
+					break;
+				default:
+					System.out.println("invalid choice!");
+			}//end switch
+
+			numTurns--;
+			if (numTurns > 0)
+				System.out.println("Number of turns remaining is: " + numTurns);
+
+		} while(numTurns > 0);
 	}//end battleChoices
 
 }//end Hero class
