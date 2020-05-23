@@ -136,7 +136,7 @@ This method is called by: external sources
 
 			switch (choice)
 			{
-				case 1: mainAttack(opponent);
+				case 1: normalAttack(opponent);
 					break;
 				case 2: specialMove.preformSpecial(this, (Monster) opponent);
 					break;

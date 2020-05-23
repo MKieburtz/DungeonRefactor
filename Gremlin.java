@@ -18,11 +18,11 @@ public class Gremlin extends Monster
 
     }//end constructor
 
-	public void mainAttack(DungeonCharacter opponent)
+	public void normalAttack(DungeonCharacter opponent)
 	{
 		System.out.println(stats.name + " jabs his kris at " +
 							opponent.getName() + ":");
-		super.mainAttack(opponent);
+		super.normalAttack(opponent);
 
 	}//end override of attack
 
