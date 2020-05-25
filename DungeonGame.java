@@ -9,7 +9,7 @@ public class DungeonGame {
         char again;
 
         System.out.println("Play again (y/n)?");
-        again = Keyboard.kb.nextLine().trim().charAt(0);
+        again = Keyboard.kb.next().trim().charAt(0);
 
         return (again == 'Y' || again == 'y');
     }//end playAgain method
@@ -40,7 +40,7 @@ public class DungeonGame {
 
             //let the player bail out if desired
             System.out.print("\n-->q to quit, anything else to continue: ");
-            pause = Keyboard.kb.nextLine().trim().charAt(0);
+            pause = Keyboard.kb.next().trim().charAt(0);
 
         }//end battle loop
 
