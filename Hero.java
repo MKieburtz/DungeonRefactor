@@ -1,5 +1,3 @@
-
-
 /**
  * Title: Hero.java
  *
@@ -30,9 +28,9 @@
 
 public abstract class Hero extends DungeonCharacter
 {
-	protected double chanceToBlock;
-	protected int numTurns;
-	protected SpecialMove specialMove;
+	protected double chanceToBlock;  //field
+	protected int numTurns;           //field
+    protected SpecialMove specialMove;
 
 //-----------------------------------------------------------------
 //calls base constructor and gets name of hero from user
@@ -73,11 +71,11 @@ This method is called by: subtractHitPoints()
   {
 		return Math.random() <= chanceToBlock;
 
-  }//end defend method
-
-	public void incrementNumTurns() {
-  		numTurns++;
-	}
+  }
+  //end defend method
+  public void incrementNumTurns() {
+      numTurns++;
+  }
 
 /*-------------------------------------------------------
 subtractHitPoints checks to see if hero blocked attack, if so a message
@@ -91,7 +89,7 @@ Returns: nothing
 This method calls: defend() or base version of method
 This method is called by: attack() from base class
 ---------------------------------------------------------*/
-public void subtractHitPoints(int hitPoints)
+public void loseHealth(int hitPoints)
 	{
 		if (defend())
 		{
@@ -99,7 +97,7 @@ public void subtractHitPoints(int hitPoints)
 		}
 		else
 		{
-			super.subtractHitPoints(hitPoints);
+			super.loseHealth(hitPoints);
 		}
 
 
@@ -125,62 +123,37 @@ This method is called by: external sources
 			numTurns++;
 
 		System.out.println("Number of turns this round is: " + numTurns);
+        int choice;
+        do
+        {
+            info();
+            System.out.println("1. Attack Opponent");
+            System.out.println("2. " + specialMove.getName());
+            System.out.print("Choose an option: ");
+            choice = Keyboard.kb.nextInt();
 
-		int choice;
-		do
-		{
-			System.out.println("1. Attack Opponent");
-			System.out.println("2. " + specialMove.getName());
-			System.out.print("Choose an option: ");
-			choice = Keyboard.kb.nextInt();
+            switch (choice)
+            {
+                case 1: normalAttack(opponent);
+                    break;
+                case 2: specialMove.preformSpecial(this, (Monster) opponent);
+                    break;
+                default:
+                    System.out.println("invalid choice!");
+            }//end switch
+            numTurns--;
+            if (numTurns > 0)
+                System.out.println("Number of turns remaining is: " + numTurns);
+        } while(numTurns > 0);
+    }//end battleChoices
 
-			switch (choice)
-			{
-				case 1: attack(opponent);
-					break;
-				case 2: specialMove.preformSpecial(this, (Monster) opponent);
-					break;
-				default:
-					System.out.println("invalid choice!");
-			}//end switch
-
-			numTurns--;
-			if (numTurns > 0)
-				System.out.println("Number of turns remaining is: " + numTurns);
-
-		} while(numTurns > 0);
-	}//end battleChoices
-
-
-	/*-------------------------------------------------------------------
-    chooseHero allows the user to select a hero, creates that hero, and
-    returns it.  It utilizes a polymorphic reference (Hero) to accomplish
-    this task
-    ---------------------------------------------------------------------*/
-	public static Hero chooseHero()
-	{
-		int choice;
-		Hero theHero;
-
-		System.out.println("Choose a hero:\n" +
-				"1. Warrior\n" +
-				"2. Sorceress\n" +
-				"3. Thief");
-		choice = Integer.parseInt(Keyboard.kb.nextLine());
-
-		switch(choice)
-		{
-			case 1: return new Warrior();
-
-			case 2: return new Sorceress();
-
-			case 3: return new Thief();
-
-			default: System.out.println("invalid choice, returning Thief");
-				return new Thief();
-		}//end switch
-	}//end chooseHero method
-
+    public void info() {
+	    System.out.println("Name: " + stats.name );
+	    System.out.println("Health: " + stats.hitPoints );
+	    System.out.println("Healing Potions:" );
+	    System.out.println("Vision Potions:" );
+	    System.out.println("Total pillars found:" );
+    }
 
 
 }//end Hero class
