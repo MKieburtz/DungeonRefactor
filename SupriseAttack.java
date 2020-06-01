@@ -15,7 +15,7 @@ public class SupriseAttack implements SpecialMove {
             System.out.println("Surprise attack was successful!\n" +
                     attacker.getName() + " gets an additional turn.");
             attacker.incrementNumTurns();
-            attacker.attack(opponent);
+            attacker.normalAttack(opponent);
         }//end surprise
         else if (surprise >= blockThreshold)
         {
@@ -23,7 +23,7 @@ public class SupriseAttack implements SpecialMove {
                     " blocked your attack!");
         }
         else
-            attacker.attack(opponent);
+            attacker.normalAttack(opponent);
     }
 
     @Override

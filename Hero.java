@@ -148,12 +148,10 @@ This method is called by: external sources
     }//end battleChoices
 
     public void info() {
-	    System.out.println("Name: " + stats.name );
-	    System.out.println("Health: " + stats.hitPoints );
-	    System.out.println("Healing Potions:" );
-	    System.out.println("Vision Potions:" );
-	    System.out.println("Total pillars found:" );
-    }
-
-
+		System.out.println("Name: " + stats.name);
+		System.out.println("Health: " + stats.hitPoints);
+		System.out.println("Healing Potions:");
+		System.out.println("Vision Potions:");
+		System.out.println("Total pillars found:");
+	}
 }//end Hero class

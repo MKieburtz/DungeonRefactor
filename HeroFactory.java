@@ -1,5 +1,3 @@
-package dungeon;
-
 public class HeroFactory extends Hero{
 
     public HeroFactory(String name, int hitPoints, int attackSpeed, double chanceToHit, int damageMin, int damageMax, double chanceToBlock) {

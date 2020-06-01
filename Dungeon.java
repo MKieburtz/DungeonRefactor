@@ -51,8 +51,8 @@ public class Dungeon
 
 		do
 		{
-		    theHero = Hero.chooseHero();
-		    theMonster = Monster.generateMonster();
+		    theHero = HeroFactory.chooseHero();
+		    theMonster = MonsterFactory.generateMonster();
 			DungeonGame.battle(theHero, theMonster);
 
 		} while (DungeonGame.playAgain());

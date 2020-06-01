@@ -24,11 +24,11 @@ public class Warrior extends Hero
     }//end constructor
 
 
-	public void attack(DungeonCharacter opponent)
+	public void normalAttack(DungeonCharacter opponent)
 	{
 		System.out.println(stats.name + " swings a mighty sword at " +
 							opponent.getName() + ":");
-		super.attack(opponent);
+		super.normalAttack(opponent);
 	}//end override of attack method
 
 }//end Hero class

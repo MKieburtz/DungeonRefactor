@@ -1,5 +1,3 @@
-package dungeon;
-
 public class MonsterFactory extends Monster {
 
 

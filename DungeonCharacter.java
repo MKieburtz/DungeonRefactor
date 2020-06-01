@@ -103,7 +103,7 @@ Returns: nothing
 This method calls: nothing
 This method is called by: overridden versions in Hero and Monster
 ---------------------------------------------------------*/
-	public void subtractHitPoints(int hitPoints)
+	public void loseHealth(int hitPoints)
 	{
 		if (hitPoints <0)
 			System.out.println("Hitpoint amount must be positive.");
@@ -151,7 +151,7 @@ This method calls: Math.random(), subtractHitPoints()
 This method is called by: overridden versions of the method in monster and
 hero classes and externally
 ---------------------------------------------------------*/
-	public void attack(DungeonCharacter opponent)
+	public void normalAttack(DungeonCharacter opponent)
 	{
 		boolean canAttack;
 		int damage;
@@ -162,7 +162,7 @@ hero classes and externally
 		{
 			damage = (int)(Math.random() * (stats.damageMax - stats.damageMin + 1))
 						+ stats.damageMin ;
-			opponent.subtractHitPoints(damage);
+			opponent.loseHealth(damage);
 
 
         }//end if can attack
